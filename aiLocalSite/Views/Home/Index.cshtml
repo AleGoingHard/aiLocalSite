@@ -3,214 +3,1063 @@
     Layout = "_Layout";
 }
 
-<section class="hero-section bg-gradient-primary text-white">
-    <div class="container py-5">
-        <div class="row align-items-center">
-            <div class="col-lg-6 mb-4 mb-lg-0">
-                <h1 class="display-3 fw-bold mb-4">Esplora il Futuro dell'<span class="text-highlight">Intelligenza Artificiale</span></h1>
-                <p class="lead mb-4">Scopri come le tecnologie AI stanno rivoluzionando il mondo. Analisi approfondite, casi di studio e prospettive sul futuro dell'intelligenza artificiale.</p>
-                <div class="d-flex flex-wrap gap-3">
-                    <a href="/pagina1" class="btn btn-light btn-lg px-4">Inizia l'Esplorazione</a>
-                    <a href="#sezioni-principali" class="btn btn-outline-light btn-lg px-4">Scopri di Più</a>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="position-relative">
-                    <div class="ai-visual rounded-lg shadow-lg overflow-hidden">
-                        <img src="/images/ai-hero.jpg" alt="Intelligenza Artificiale - Rappresentazione visiva" class="img-fluid rounded" onerror="this.src='/api/placeholder/800/500'; this.onerror=null;">
-                    </div>
-                    <div class="ai-particles position-absolute top-0 start-0 w-100 h-100"></div>
-                </div>
-            </div>
-        </div>
+<style>
+    /* IMPORTANTE: Usiamo @@ per evitare errori con Razor quando scrviamo @@keyframes e @@media */
+
+    /* === STILI GLOBALI === */
+    :root {
+        --primary-color: #3a86ff;
+        --secondary-color: #8338ec;
+        --accent-color: #ff006e;
+        --dark-color: #14213d;
+        --light-color: #f8f9fa;
+        --gradient-primary: linear-gradient(135deg, #3a86ff, #8338ec);
+        --gradient-secondary: linear-gradient(135deg, #ff006e, #fb5607);
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Poppins', sans-serif;
+        background-color: #070b14;
+        color: var(--light-color);
+        overflow-x: hidden;
+    }
+
+    /* === HEADER AREA === */
+    .hero-section {
+        position: relative;
+        height: 100vh;
+        width: 100%;
+        overflow: hidden;
+        background: var(--dark-color);
+    }
+
+    .hero-particles {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 3;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        text-align: center;
+        padding: 0 15px;
+    }
+
+    .hero-title {
+        font-size: 5rem;
+        font-weight: 800;
+        margin-bottom: 20px;
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    .hero-subtitle {
+        font-size: 1.5rem;
+        max-width: 800px;
+        margin-bottom: 40px;
+        color: rgba(255, 255, 255, 0.8);
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    .btn-explore {
+        padding: 12px 32px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border-radius: 50px;
+        background: var(--gradient-primary);
+        color: white;
+        text-decoration: none;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+        .btn-explore:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+        }
+
+    /* === SEZIONE CARATTERISTICHE === */
+    .features-section {
+        padding: 100px 0;
+        background: #080f1e;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .section-title {
+        text-align: center;
+        margin-bottom: 60px;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: white;
+    }
+
+        .section-title span {
+            background: var(--gradient-secondary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+    .feature-card {
+        background: rgba(20, 33, 61, 0.6);
+        border-radius: 15px;
+        padding: 30px;
+        margin-bottom: 30px;
+        transition: all 0.3s ease;
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(10px);
+        transform: translateY(50px);
+        opacity: 0;
+    }
+
+        .feature-card:hover {
+            transform: translateY(-5px) !important;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(58, 134, 255, 0.1), rgba(131, 56, 236, 0.1));
+            z-index: -1;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+    .feature-icon {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    .feature-title {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        color: white;
+    }
+
+    .feature-description {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    /* === SEZIONE TECNOLOGIE === */
+    .technologies-section {
+        padding: 100px 0;
+        background: #050a15;
+        position: relative;
+    }
+
+    .tech-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 30px;
+        margin-top: 50px;
+    }
+
+    .tech-item {
+        background: rgba(20, 33, 61, 0.6);
+        border-radius: 15px;
+        padding: 30px;
+        text-align: center;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        transform: translateY(50px);
+        opacity: 0;
+    }
+
+        .tech-item:hover {
+            transform: translateY(-5px) !important;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+    .tech-icon {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        color: var(--accent-color);
+    }
+
+    .tech-name {
+        font-size: 1.2rem;
+        color: white;
+        margin-bottom: 10px;
+    }
+
+    .tech-description {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.9rem;
+    }
+
+    /* === SEZIONE CTA === */
+    .cta-section {
+        padding: 100px 0;
+        background: #0a1326;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .cta-content {
+        text-align: center;
+        position: relative;
+        z-index: 1;
+    }
+
+    .cta-title {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        color: white;
+    }
+
+    .cta-description {
+        font-size: 1.2rem;
+        max-width: 800px;
+        margin: 0 auto 40px;
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    .btn-cta {
+        padding: 15px 40px;
+        font-size: 1.2rem;
+        font-weight: 600;
+        border-radius: 50px;
+        background: var(--gradient-secondary);
+        color: white;
+        text-decoration: none;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+    }
+
+        .btn-cta:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+        }
+
+    /* === FOOTER === */
+    .footer {
+        padding: 50px 0;
+        background: #050a15;
+        color: rgba(255, 255, 255, 0.7);
+        text-align: center;
+    }
+
+    .footer-logo {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        color: white;
+    }
+
+    .footer-links {
+        margin-bottom: 20px;
+    }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0 15px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+            .footer-links a:hover {
+                color: var(--primary-color);
+            }
+
+    .footer-social {
+        margin-bottom: 20px;
+    }
+
+        .footer-social a {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 2rem;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+
+            .footer-social a:hover {
+                color: var(--primary-color);
+            }
+
+    .footer-copyright {
+        font-size: 0.9rem;
+    }
+
+    /* === ANIMAZIONI === */
+    /* Utilizziamo @@ per gli @@keyframes in Razor */
+    @@keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @@keyframes floatAnimation {
+        0% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-15px);
+        }
+
+        100% {
+            transform: translateY(0);
+        }
+    }
+
+    @@keyframes gradientAnimation {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    @@keyframes pulseAnimation {
+        0% {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        50% {
+            transform: scale(1.05);
+            opacity: 0.8;
+        }
+
+        100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    @@keyframes rotateAnimation {
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@keyframes glowAnimation {
+        0% {
+            box-shadow: 0 0 5px rgba(58, 134, 255, 0.5);
+        }
+
+        50% {
+            box-shadow: 0 0 20px rgba(58, 134, 255, 0.8);
+        }
+
+        100% {
+            box-shadow: 0 0 5px rgba(58, 134, 255, 0.5);
+        }
+    }
+
+    /* === MEDIA QUERIES === */
+    /* Utilizziamo @@ per le @@media in Razor */
+    @@media (max-width: 992px) {
+        .hero-title {
+            font-size: 4rem;
+        }
+
+        .feature-card {
+            margin-bottom: 20px;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .hero-title {
+            font-size: 3rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+        }
+    }
+
+    /* GPU Accelerazione */
+    .hero-title, .hero-subtitle, .btn-explore, .feature-card, .tech-item {
+        will-change: transform, opacity;
+    }
+
+    /* Effetti 3D per le carte */
+    .feature-card, .tech-item {
+        transform-style: preserve-3d;
+        perspective: 1000px;
+    }
+
+        /* Effetto neumorfico per le carte */
+        .feature-card:hover, .tech-item:hover {
+            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.25), -10px -10px 20px rgba(255, 255, 255, 0.03);
+        }
+
+    /* Effetto Glitch */
+    .glitch {
+        position: relative;
+    }
+
+        .glitch::before, .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+        }
+
+        .glitch::before {
+            left: 2px;
+            text-shadow: -2px 0 #ff00ea;
+            clip: rect(24px, 550px, 90px, 0);
+            animation: glitch-anim 3s infinite linear alternate-reverse;
+        }
+
+        .glitch::after {
+            left: -2px;
+            text-shadow: -2px 0 #00fff9;
+            clip: rect(85px, 550px, 140px, 0);
+            animation: glitch-anim 2s infinite linear alternate-reverse;
+        }
+
+    /* Cursore personalizzato */
+    .cursor {
+        position: fixed;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: var(--accent-color);
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        mix-blend-mode: difference;
+        z-index: 9999;
+        transition: transform 0.2s ease;
+    }
+
+    .cursor-follower {
+        position: fixed;
+        width: 40px;
+        height: 40px;
+        border: 2px solid var(--primary-color);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        z-index: 9998;
+        transition: transform 0.5s ease, width 0.3s ease, height 0.3s ease;
+    }
+
+    /* Effetto Shine */
+    .shine {
+        position: relative;
+        overflow: hidden;
+    }
+
+        .shine::after {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: -100%;
+            width: 50%;
+            height: 200%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 100%);
+            transform: rotate(30deg);
+            transition: all 0.5s ease;
+        }
+
+        .shine:hover::after {
+            left: 100%;
+            top: 100%;
+        }
+
+    /* Circle Animation */
+    .circle-animation {
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(58,134,255,0.2) 0%, rgba(131,56,236,0.2) 100%);
+        animation: pulseAnimation 5s infinite alternate;
+    }
+</style>
+
+<!-- HERO SECTION -->
+<section class="hero-section">
+    <div class="hero-particles" id="particles-js"></div>
+    <div class="hero-content">
+        <h1 class="hero-title">Il Futuro dell'Intelligenza Artificiale</h1>
+        <p class="hero-subtitle">Esplora le frontiere dell'innovazione tecnologica e scopri come l'AI sta trasformando il nostro mondo, ridefinendo il possibile e creando nuove opportunità.</p>
+        <a href="#features" class="btn-explore">Scopri di più</a>
     </div>
 </section>
 
-<section id="sezioni-principali" class="feature-section py-5">
+<!-- FEATURES SECTION -->
+<section class="features-section" id="features">
     <div class="container">
-        <div class="section-header text-center mb-5">
-            <h2 class="display-5 fw-bold">Aree di Innovazione</h2>
-            <p class="lead text-muted">Esplora le principali aree dove l'AI sta creando un impatto significativo</p>
-        </div>
-
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="card h-100 feature-card shadow-sm border-0">
-                    <div class="card-body p-4">
-                        <div class="feature-icon mb-3">
-                            <i class="bi bi-cpu"></i>
-                        </div>
-                        <h3 class="card-title h4">Machine Learning</h3>
-                        <p class="card-text">Algoritmi che permettono ai computer di imparare dai dati e migliorare le loro prestazioni nel tempo senza essere esplicitamente programmati.</p>
-                        <a href="/pagina1" class="btn btn-link p-0">Approfondisci <i class="bi bi-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card h-100 feature-card shadow-sm border-0">
-                    <div class="card-body p-4">
-                        <div class="feature-icon mb-3">
-                            <i class="bi bi-chat-dots"></i>
-                        </div>
-                        <h3 class="card-title h4">Elaborazione del Linguaggio</h3>
-                        <p class="card-text">Tecnologie che consentono alle macchine di comprendere, interpretare e generare linguaggio umano in modo naturale e contestuale.</p>
-                        <a href="/pagina2" class="btn btn-link p-0">Approfondisci <i class="bi bi-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card h-100 feature-card shadow-sm border-0">
-                    <div class="card-body p-4">
-                        <div class="feature-icon mb-3">
-                            <i class="bi bi-eye"></i>
-                        </div>
-                        <h3 class="card-title h4">Computer Vision</h3>
-                        <p class="card-text">Sistemi che permettono ai computer di identificare e processare immagini e video come farebbe un essere umano, abilitando applicazioni rivoluzionarie.</p>
-                        <a href="/pagina3" class="btn btn-link p-0">Approfondisci <i class="bi bi-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="stats-section py-5 bg-light">
-    <div class="container">
-        <div class="row text-center">
-            <div class="col-md-3 mb-4 mb-md-0">
-                <div class="stat-item">
-                    <h3 class="stat-number display-4 fw-bold text-primary" data-count="37">37</h3>
-                    <p class="stat-label">Miliardi di $ investiti in AI nel 2023</p>
-                </div>
-            </div>
-            <div class="col-md-3 mb-4 mb-md-0">
-                <div class="stat-item">
-                    <h3 class="stat-number display-4 fw-bold text-primary" data-count="85">85</h3>
-                    <p class="stat-label">% delle aziende Fortune 500 che utilizzano AI</p>
-                </div>
-            </div>
-            <div class="col-md-3 mb-4 mb-md-0">
-                <div class="stat-item">
-                    <h3 class="stat-number display-4 fw-bold text-primary" data-count="63">63</h3>
-                    <p class="stat-label">% di incremento dell'efficienza lavorativa</p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="stat-item">
-                    <h3 class="stat-number display-4 fw-bold text-primary" data-count="92">92</h3>
-                    <p class="stat-label">% di accuratezza nei modelli avanzati</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="cta-section py-5">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6 mb-4 mb-lg-0">
-                <h2 class="display-5 fw-bold mb-3">Pronto a scoprire il potenziale dell'AI?</h2>
-                <p class="lead">Esplora le nostre risorse e approfondimenti per capire come l'intelligenza artificiale può trasformare il tuo settore e migliorare i tuoi processi.</p>
-                <a href="/pagina1" class="btn btn-primary btn-lg mt-3">Inizia il Viaggio</a>
-            </div>
-            <div class="col-lg-6">
-                <div class="card border-0 shadow-lg">
-                    <div class="card-body p-4">
-                        <h3 class="card-title h4 mb-4">Iscriviti alla Newsletter</h3>
-                        <form>
-                            <div class="mb-3">
-                                <input type="email" class="form-control form-control-lg" placeholder="La tua email" required>
-                            </div>
-                            <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="privacy-check" required>
-                                <label class="form-check-label" for="privacy-check">Accetto la <a href="/Privacy">Privacy Policy</a></label>
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-lg w-100">Iscriviti</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="testimonial-section py-5 bg-light">
-    <div class="container">
-        <div class="section-header text-center mb-5">
-            <h2 class="display-5 fw-bold">Cosa Dicono gli Esperti</h2>
-        </div>
-
+        <h2 class="section-title">Scopri le <span>Potenzialità</span> dell'AI</h2>
         <div class="row">
-            <div class="col-lg-4 mb-4">
-                <div class="card testimonial-card h-100 border-0 shadow-sm">
-                    <div class="card-body p-4">
-                        <div class="testimonial-quote mb-3">
-                            <i class="bi bi-quote fs-2 text-primary"></i>
-                        </div>
-                        <p class="card-text mb-4">"L'intelligenza artificiale rappresenta il capitolo più significativo dell'innovazione tecnologica del nostro secolo. Le sue applicazioni stanno ridefinendo interi settori."</p>
-                        <div class="d-flex align-items-center">
-                            <div class="testimonial-avatar me-3">
-                                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                                    <span>ML</span>
-                                </div>
-                            </div>
-                            <div>
-                                <h5 class="mb-0">Marco Lombardi</h5>
-                                <p class="text-muted mb-0">Ricercatore AI, Università di Milano</p>
-                            </div>
-                        </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card" data-delay="100">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
                     </div>
+                    <h3 class="feature-title">Deep Learning</h3>
+                    <p class="feature-description">Reti neurali avanzate che simulano il cervello umano, capaci di apprendere da enormi quantità di dati e migliorare continuamente le loro prestazioni.</p>
                 </div>
             </div>
-
-            <div class="col-lg-4 mb-4">
-                <div class="card testimonial-card h-100 border-0 shadow-sm">
-                    <div class="card-body p-4">
-                        <div class="testimonial-quote mb-3">
-                            <i class="bi bi-quote fs-2 text-primary"></i>
-                        </div>
-                        <p class="card-text mb-4">"Quello che mi affascina dell'AI non è solo ciò che può fare oggi, ma il suo potenziale futuro. Stiamo appena iniziando a vedere cosa sia realmente capace di fare."</p>
-                        <div class="d-flex align-items-center">
-                            <div class="testimonial-avatar me-3">
-                                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                                    <span>SR</span>
-                                </div>
-                            </div>
-                            <div>
-                                <h5 class="mb-0">Sofia Ricci</h5>
-                                <p class="text-muted mb-0">CTO, TechInnovate</p>
-                            </div>
-                        </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card" data-delay="300">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
                     </div>
+                    <h3 class="feature-title">Robotica Intelligente</h3>
+                    <p class="feature-description">Sistemi robotici dotati di AI che possono interagire con l'ambiente, prendere decisioni autonome e svolgere compiti complessi con precisione.</p>
                 </div>
             </div>
-
-            <div class="col-lg-4 mb-4">
-                <div class="card testimonial-card h-100 border-0 shadow-sm">
-                    <div class="card-body p-4">
-                        <div class="testimonial-quote mb-3">
-                            <i class="bi bi-quote fs-2 text-primary"></i>
-                        </div>
-                        <p class="card-text mb-4">"L'etica dell'AI deve procedere di pari passo con lo sviluppo tecnologico. Solo così potremo garantire un'innovazione responsabile e benefica per la società."</p>
-                        <div class="d-flex align-items-center">
-                            <div class="testimonial-avatar me-3">
-                                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                                    <span>AB</span>
-                                </div>
-                            </div>
-                            <div>
-                                <h5 class="mb-0">Alessandro Bianchi</h5>
-                                <p class="text-muted mb-0">Direttore Centro Etica Digitale</p>
-                            </div>
-                        </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card" data-delay="500">
+                    <div class="feature-icon">
+                        <i class="fas fa-language"></i>
                     </div>
+                    <h3 class="feature-title">NLP Avanzato</h3>
+                    <p class="feature-description">Elaborazione del linguaggio naturale che consente ai computer di comprendere, interpretare e generare linguaggio umano con precisione sempre maggiore.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card" data-delay="700">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="feature-title">Analisi Predittiva</h3>
+                    <p class="feature-description">Algoritmi avanzati che analizzano dati storici per prevedere tendenze future, ottimizzare processi e supportare decisioni strategiche.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card" data-delay="900">
+                    <div class="feature-icon">
+                        <i class="fas fa-fingerprint"></i>
+                    </div>
+                    <h3 class="feature-title">Riconoscimento Biometrico</h3>
+                    <p class="feature-description">Tecnologie di identificazione basate su caratteristiche biologiche uniche, che garantiscono sicurezza avanzata e autenticazione precisa.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card" data-delay="1100">
+                    <div class="feature-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="feature-title">AI Generativa</h3>
+                    <p class="feature-description">Sistemi creativi che possono generare contenuti originali, dal testo alle immagini, dalla musica al codice, aprendo nuove frontiere creative.</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
+<!-- TECHNOLOGIES SECTION -->
+<section class="technologies-section">
+    <div class="container">
+        <h2 class="section-title">Tecnologie <span>All'Avanguardia</span></h2>
+        <div class="tech-grid">
+            <div class="tech-item" data-delay="100">
+                <div class="tech-icon">
+                    <i class="fas fa-microchip"></i>
+                </div>
+                <h3 class="tech-name">Quantum Computing</h3>
+                <p class="tech-description">Elaborazione dati quantistica per risolvere problemi impossibili per i computer tradizionali.</p>
+            </div>
+            <div class="tech-item" data-delay="300">
+                <div class="tech-icon">
+                    <i class="fas fa-network-wired"></i>
+                </div>
+                <h3 class="tech-name">Reti Neurali</h3>
+                <p class="tech-description">Architetture ispirate al cervello umano per apprendimento avanzato.</p>
+            </div>
+            <div class="tech-item" data-delay="500">
+                <div class="tech-icon">
+                    <i class="fas fa-cube"></i>
+                </div>
+                <h3 class="tech-name">Blockchain AI</h3>
+                <p class="tech-description">Integrazione di AI con tecnologie blockchain per sistemi decentralizzati sicuri.</p>
+            </div>
+            <div class="tech-item" data-delay="700">
+                <div class="tech-icon">
+                    <i class="fas fa-vr-cardboard"></i>
+                </div>
+                <h3 class="tech-name">AI in Realtà Aumentata</h3>
+                <p class="tech-description">Esperienze immersive potenziate dall'intelligenza artificiale.</p>
+            </div>
+        </div>
+    </div>
+</section>
 
-}
+<!-- CTA SECTION -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content">
+            <h2 class="cta-title">Pronto a entrare nel futuro?</h2>
+            <p class="cta-description">Scopri come l'intelligenza artificiale può trasformare la tua attività, migliorare i tuoi processi e aprire nuove opportunità innovative.</p>
+            <a href="#" class="btn-cta">Esplora le soluzioni</a>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-logo">
+            <span class="gradient-text">AI Vision</span>
+        </div>
+        <div class="footer-links">
+            <a href="#">Home</a>
+            <a href="#">Chi Siamo</a>
+            <a href="#">Servizi</a>
+            <a href="#">Blog</a>
+            <a href="#">Contatti</a>
+        </div>
+        <div class="footer-social">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+        <div class="footer-copyright">
+            &copy; 2025 AI Vision. Tutti i diritti riservati.
+        </div>
+    </div>
+</footer>
+
+<!-- SCRIPT -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Animazione elementi hero
+        const heroTitle = document.querySelector('.hero-title');
+        const heroSubtitle = document.querySelector('.hero-subtitle');
+        const btnExplore = document.querySelector('.btn-explore');
+
+        setTimeout(() => {
+            heroTitle.style.animation = 'fadeInUp 1s forwards';
+        }, 500);
+
+        setTimeout(() => {
+            heroSubtitle.style.animation = 'fadeInUp 1s forwards';
+        }, 700);
+
+        setTimeout(() => {
+            btnExplore.style.animation = 'fadeInUp 1s forwards';
+        }, 900);
+
+        // Animazione carte feature quando sono visibili
+        const featureCards = document.querySelectorAll('.feature-card');
+        const techItems = document.querySelectorAll('.tech-item');
+
+        // Funzione per verificare se un elemento è nel viewport
+        function isInViewport(element) {
+            const rect = element.getBoundingClientRect();
+            return (
+                rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.bottom >= 0
+            );
+        }
+
+        // Funzione per animare gli elementi quando sono visibili
+        function animateOnScroll() {
+            featureCards.forEach(card => {
+                if (isInViewport(card) && !card.classList.contains('animated')) {
+                    const delay = parseInt(card.getAttribute('data-delay'));
+                    setTimeout(() => {
+                        card.style.animation = 'fadeInUp 1s forwards';
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                        card.classList.add('animated');
+                    }, delay);
+                }
+            });
+
+            techItems.forEach(item => {
+                if (isInViewport(item) && !item.classList.contains('animated')) {
+                    const delay = parseInt(item.getAttribute('data-delay'));
+                    setTimeout(() => {
+                        item.style.animation = 'fadeInUp 1s forwards';
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateY(0)';
+                        item.classList.add('animated');
+                    }, delay);
+                }
+            });
+        }
+
+        // Animazione al caricamento e allo scroll
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('resize', animateOnScroll);
+        animateOnScroll(); // Esegui subito per gli elementi già visibili
+
+        // Effetto particelle di sfondo
+        // Viene utilizzata una libreria come particles.js
+        // Questa è una versione semplificata per creare particelle di sfondo
+        const canvas = document.createElement('canvas');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        canvas.style.position = 'absolute';
+        canvas.style.top = '0';
+        canvas.style.left = '0';
+        canvas.style.zIndex = '1';
+        document.querySelector('.hero-particles').appendChild(canvas);
+
+        const ctx = canvas.getContext('2d');
+        const particles = [];
+
+        function createParticle() {
+            return {
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 5 + 1,
+                speedX: Math.random() * 3 - 1.5,
+                speedY: Math.random() * 3 - 1.5,
+                color: `rgba(${Math.floor(Math.random() * 150) + 100}, ${Math.floor(Math.random() * 150) + 100}, ${Math.floor(Math.random() * 255)}, ${Math.random() * 0.5 + 0.1})`
+            };
+        }
+
+        // Inizializza particelle
+        for (let i = 0; i < 100; i++) {
+            particles.push(createParticle());
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(particle => {
+                // Aggiorna posizione
+                particle.x += particle.speedX;
+                particle.y += particle.speedY;
+
+                // Controlla collisioni con bordi
+                if (particle.x < 0 || particle.x > canvas.width) {
+                    particle.speedX = -particle.speedX;
+                }
+                if (particle.y < 0 || particle.y > canvas.height) {
+                    particle.speedY = -particle.speedY;
+                }
+
+                // Disegna particella
+                ctx.beginPath();
+                ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                ctx.fillStyle = particle.color;
+                ctx.fill();
+
+                // Disegna connessioni tra particelle vicine
+                particles.forEach(otherParticle => {
+                    const dx = particle.x - otherParticle.x;
+                    const dy = particle.y - otherParticle.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 100) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 * (1 - distance / 100)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particle.x, particle.y);
+                        ctx.lineTo(otherParticle.x, otherParticle.y);
+                        ctx.stroke();
+                    }
+                });
+            });
+
+            requestAnimationFrame(animateParticles);
+        }
+
+        animateParticles();
+
+        // Dimensionamento automatico del canvas
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Effetto cursore personalizzato
+        const cursor = document.createElement('div');
+        cursor.classList.add('cursor');
+        document.body.appendChild(cursor);
+
+        const cursorFollower = document.createElement('div');
+        cursorFollower.classList.add('cursor-follower');
+        document.body.appendChild(cursorFollower);
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+
+            setTimeout(() => {
+                cursorFollower.style.left = e.clientX + 'px';
+                cursorFollower.style.top = e.clientY + 'px';
+            }, 50);
+        });
+
+        document.addEventListener('mousedown', () => {
+            cursor.style.transform = 'translate(-50%, -50%) scale(0.8)';
+            cursorFollower.style.transform = 'translate(-50%, -50%) scale(0.7)';
+        });
+
+        document.addEventListener('mouseup', () => {
+            cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+            cursorFollower.style.transform = 'translate(-50%, -50%) scale(1)';
+        });
+
+        const clickableElements = document.querySelectorAll('a, button, .feature-card, .tech-item');
+        clickableElements.forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                cursorFollower.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                cursorFollower.style.borderColor = 'var(--accent-color)';
+            });
+
+            element.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursorFollower.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursorFollower.style.borderColor = 'var(--primary-color)';
+            });
+        });
+
+        // Effetto parallax per lo sfondo
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+
+            const heroSection = document.querySelector('.hero-section');
+            heroSection.style.backgroundPosition = `${x * 30}% ${y * 30}%`;
+        });
+
+        // Effetto float per gli elementi
+        const heroContent = document.querySelector('.hero-content');
+        setInterval(() => {
+            heroContent.style.transform = 'translateY(-10px)';
+            setTimeout(() => {
+                heroContent.style.transform = 'translateY(0)';
+            }, 1500);
+        }, 3000);
+
+        // Animazione del testo con effetto "typewriter"
+        function typeWriter(element, text, speed = 50) {
+            let i = 0;
+            element.textContent = '';
+
+            function type() {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+
+            type();
+        }
+
+        // Effetto 3D tilt sulle card
+        const cards = document.querySelectorAll('.feature-card, .tech-item');
+
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const angleX = (y - centerY) / 20;
+                const angleY = (centerX - x) / 20;
+
+                card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+            });
+        });
+
+        // Scroll smooth per i link di navigazione
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Animazione numeri crescenti
+        function animateValue(obj, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.textContent = Math.floor(progress * (end - start) + start);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Effetto particelle che seguono il mouse
+        let mouseX = 0;
+        let mouseY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
+            // Crea una particella al passaggio del mouse
+            if (Math.random() > 0.9) {
+                const particle = document.createElement('div');
+                particle.className = 'mouse-particle';
+                particle.style.left = mouseX + 'px';
+                particle.style.top = mouseY + 'px';
+                particle.style.position = 'fixed';
+                particle.style.width = Math.random() * 10 + 5 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 70%)`;
+                particle.style.borderRadius = '50%';
+                particle.style.pointerEvents = 'none';
+                particle.style.zIndex = '9999';
+                particle.style.opacity = Math.random() * 0.5 + 0.5;
+
+                document.body.appendChild(particle);
+
+                // Anima e rimuovi la particella
+                setTimeout(() => {
+                    const randomX = (Math.random() - 0.5) * 100;
+                    const randomY = (Math.random() - 0.5) * 100;
+
+                    particle.style.transition = 'all 1s ease-out';
+                    particle.style.transform = `translate(${randomX}px, ${randomY}px)`;
+                    particle.style.opacity = '0';
+
+                    setTimeout(() => {
+                        particle.remove();
+                    }, 1000);
+                }, 10);
+            }
+        });
+
+        // Effetto di scroll reveal
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.section-title, .cta-title, .cta-description, .btn-cta');
+
+            reveals.forEach(reveal => {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveal.getBoundingClientRect().top;
+                const elementVisible = 150;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    reveal.classList.add('active');
+                    reveal.style.animation = 'fadeInUp 1s forwards';
+                }
+            });
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll();
+
+        // Effetto glitch temporaneo sui titoli
+        const titles = document.querySelectorAll('.section-title, .cta-title');
+
+        titles.forEach(title => {
+            title.addEventListener('mouseenter', () => {
+                title.classList.add('glitch');
+                title.setAttribute('data-text', title.textContent);
+
+                setTimeout(() => {
+                    title.classList.remove('glitch');
+                }, 2000);
+            });
+        });
+
+        // Aggiungi cerchi animati casuali nella hero section
+        const heroSection = document.querySelector('.hero-section');
+
+        for (let i = 0; i < 5; i++) {
+            const circle = document.createElement('div');
+            circle.classList.add('circle-animation');
+
+            circle.style.left = Math.random() * 100 + '%';
+            circle.style.top = Math.random() * 100 + '%';
+            circle.style.animationDelay = Math.random() * 5 + 's';
+            circle.style.opacity = Math.random() * 0.3 + 0.1;
+            circle.style.transform = `scale(${Math.random() * 1 + 0.5})`;
+
+            heroSection.appendChild(circle);
+        }
+
+        // Effetto shine sui bottoni
+        const buttons = document.querySelectorAll('.btn-explore, .btn-cta');
+
+        buttons.forEach(button => {
+            button.classList.add('shine');
+        });
+    });
+</script>
